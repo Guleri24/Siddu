@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+group 'guleri24'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':Kademlia')
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+    // Adjusted library; some classes now implement Serializable.
+    implementation files("lib/cryptid-core-1.0.0-jar-with-dependencies.jar")
+    implementation files("lib/CloudCrypto-1.0-SNAPSHOT-jar-with-dependencies.jar")
+    implementation('com.google.guava:guava:31.1-jre')
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+    implementation 'org.jetbrains:annotations:23.0.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.guleri24.siddu.Demo'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+javadoc {
+    configure(options) {
+        tags(
+                'todo:X"',
+                'apiNote:a:"API Note:"',
+                'implSpec:a:"Implementation Requirements:"',
+                'implNote:a:"Implementation Note:"'
+        )
+    }
+}
