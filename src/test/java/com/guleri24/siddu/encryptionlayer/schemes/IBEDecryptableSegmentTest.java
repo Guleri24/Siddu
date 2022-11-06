@@ -27,7 +27,7 @@ class IBEDecryptableSegmentTest {
                 "qui officia deserunt mollit anim id est laborum.";
         Pair<PublicParameters, BigInteger> pkg = IBEDecryptableSegment.generatePKG();
         String identity = "WRITE://A/B";
-        IBEDecryptableSegment<String> ibeDecryptableSegment = new IBEDecryptableSegment(data,
+        IBEDecryptableSegment<String> ibeDecryptableSegment = new IBEDecryptableSegment<>(data,
                 new ImmutablePair<>(pkg.getLeft(), identity));
 
         System.out.println(new String(SerializationUtils.serialize(ibeDecryptableSegment), StandardCharsets.UTF_8)); // Debug purposes.

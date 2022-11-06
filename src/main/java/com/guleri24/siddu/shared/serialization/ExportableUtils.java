@@ -34,8 +34,7 @@ public abstract class ExportableUtils {
     public static <T extends Exportable> T deserialize(byte[] bytes, @NotNull Class<T> clazz) throws IOException {
         try {
             Method deserializationMethod = clazz.getMethod("deserialize", ByteBuffer.class);
-            Object result = deserializationMethod.invoke(null, ByteBuffer.wrap(bytes));
-            return (T) result;
+            return (T) deserializationMethod.invoke(null, ByteBuffer.wrap(bytes));
         } catch (Exception e) {
             throw new IOException(e);
         }
