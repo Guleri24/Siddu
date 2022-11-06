@@ -10,10 +10,11 @@ repositories {
     mavenCentral()
 }
 
-
+/* For Uncheck Java warnings
 tasks.withType(JavaCompile) {
     options.compilerArgs += ['-Xlint:unchecked']
-}
+}*/
+
 dependencies {
     implementation project(':Kademlia')
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
