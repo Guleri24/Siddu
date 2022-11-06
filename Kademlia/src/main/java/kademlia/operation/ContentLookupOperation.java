@@ -246,7 +246,7 @@ public class ContentLookupOperation implements Operation, Receiver {
     @Override
     public synchronized void timeout(int comm) throws IOException {
         /* Get the node associated with this communication */
-        Node n = this.messagesTransiting.get(new Integer(comm));
+        Node n = this.messagesTransiting.get(comm);
 
         if (n == null) {
             throw new UnknownMessageException("Unknown comm: " + comm);

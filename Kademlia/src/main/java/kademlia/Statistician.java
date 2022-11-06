@@ -107,7 +107,7 @@ public class Statistician implements KadStatistician {
 
         double avg = (double) ((double) this.totalContentLookupTime / (double) this.numContentLookups) / 1000000D;
         DecimalFormat df = new DecimalFormat("#.00");
-        return new Double(df.format(avg));
+        return Double.parseDouble(df.format(avg));
     }
 
     @Override
@@ -117,45 +117,36 @@ public class Statistician implements KadStatistician {
         }
         double avg = (double) ((double) this.totalRouteLength / (double) this.numContentLookups);
         DecimalFormat df = new DecimalFormat("#.00");
-        return new Double(df.format(avg));
+        return Double.parseDouble(df.format(avg));
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Statistician: [");
 
-        sb.append("Bootstrap Time: ");
-        sb.append(this.getBootstrapTime());
-        sb.append("; ");
-
-        sb.append("Data Sent: ");
-        sb.append("(");
-        sb.append(this.numDataSent);
-        sb.append(") ");
-        sb.append(this.getTotalDataSent());
-        sb.append(" bytes; ");
-
-        sb.append("Data Received: ");
-        sb.append("(");
-        sb.append(this.numDataReceived);
-        sb.append(") ");
-        sb.append(this.getTotalDataReceived());
-        sb.append(" bytes; ");
-
-        sb.append("Num Content Lookups: ");
-        sb.append(this.numContentLookups());
-        sb.append("; ");
-
-        sb.append("Avg Content Lookup Time: ");
-        sb.append(this.averageContentLookupTime());
-        sb.append("; ");
-
-        sb.append("Avg Content Lookup Route Lth: ");
-        sb.append(this.averageContentLookupRouteLength());
-        sb.append("; ");
-
-        sb.append("]");
-
-        return sb.toString();
+        return "Statistician: [" + "Bootstrap Time: " +
+                this.getBootstrapTime() +
+                "; " +
+                "Data Sent: " +
+                "(" +
+                this.numDataSent +
+                ") " +
+                this.getTotalDataSent() +
+                " bytes; " +
+                "Data Received: " +
+                "(" +
+                this.numDataReceived +
+                ") " +
+                this.getTotalDataReceived() +
+                " bytes; " +
+                "Num Content Lookups: " +
+                this.numContentLookups() +
+                "; " +
+                "Avg Content Lookup Time: " +
+                this.averageContentLookupTime() +
+                "; " +
+                "Avg Content Lookup Route Lth: " +
+                this.averageContentLookupRouteLength() +
+                "; " +
+                "]";
     }
 }
