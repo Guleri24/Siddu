@@ -5,11 +5,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 
 /**
- * Class representing the response for a {@link ReflectionMethodInvocationServerRequest} instance.
+ * Record representing the response for a {@link ReflectionMethodInvocationServerRequest} instance.
  */
-class ReflectionMethodInvocationServerResponse implements Serializable {
-
-    private final Serializable response;
+record ReflectionMethodInvocationServerResponse(Serializable response) implements Serializable {
 
     /**
      * Constructor for the {@link ReflectionMethodInvocationServerResponse} class.
@@ -25,7 +23,8 @@ class ReflectionMethodInvocationServerResponse implements Serializable {
      *
      * @return The {@link Serializable}.
      */
-    public Serializable getResponse() {
+    @Override
+    public Serializable response() {
         return response;
     }
 }

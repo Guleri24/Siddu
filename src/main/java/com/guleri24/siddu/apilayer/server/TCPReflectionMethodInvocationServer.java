@@ -45,10 +45,9 @@ class TCPReflectionMethodInvocationServer extends ReflectionMethodInvocationServ
             var inputStream = socket.getInputStream();
             var objectInputStream = new ObjectInputStream(inputStream);
             var object = objectInputStream.readObject();
-            if (!(object instanceof ReflectionMethodInvocationServerRequest))
+            if (!(object instanceof ReflectionMethodInvocationServerRequest request))
                 throw new IOException("Received object is not a ReflectionMethodInvocationServerRequest.");
 
-            var request = (ReflectionMethodInvocationServerRequest) object;
             return new TCPReflectionMethodInvocationServerRequest(request, socket);
 
         } catch (Exception e) {

@@ -112,9 +112,7 @@ public class VerificationInformationSegmentAttestation implements Exportable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof VerificationInformationSegmentAttestation)) return false;
-
-        VerificationInformationSegmentAttestation that = (VerificationInformationSegmentAttestation) o;
+        if (!(o instanceof VerificationInformationSegmentAttestation that)) return false;
 
         if (!getEncryptedEmpiricalPrivateECKey().equals(that.getEncryptedEmpiricalPrivateECKey())) return false;
         if (!getPublicEntityIdentifierIssuer().equals(that.getPublicEntityIdentifierIssuer())) return false;

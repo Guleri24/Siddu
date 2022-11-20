@@ -62,7 +62,7 @@ abstract class ReflectionMethodInvocationServer extends Thread {
         try {
             var method = this.getClass().getDeclaredMethod(request.getInvokedMethodName(), request.getParameterTypesInvocation());
             var result = method.invoke(this, (Object[]) request.getParameters());
-            if (result != null && result instanceof ReflectionMethodInvocationServerResponse)
+            if (result instanceof ReflectionMethodInvocationServerResponse)
                 request.respond((ReflectionMethodInvocationServerResponse) result);
             else
                 logger.severe(String.format("The %s Method was successfully invoked, but the Method" +

@@ -227,8 +227,7 @@ public class IBEDecryptableSegment<DecryptedObjectType extends Serializable>
             // Construct the necessary part of the PKG to encrypt the String.
             IbeClient ibeClient = componentFactory.obtainClient(publicParametersStringPair.getLeft());
             // Actual encryption part.
-            CipherTextTuple cipherTextTuple = ibeClient.encrypt(originalObject, publicParametersStringPair.getRight());
-            return cipherTextTuple;
+            return ibeClient.encrypt(originalObject, publicParametersStringPair.getRight());
         } catch (ComponentConstructionException e) {
             throw new IllegalArgumentException(e);
         }

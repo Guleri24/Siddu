@@ -157,9 +157,7 @@ public class DisproofObject extends AbstractProofObject {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DisproofObject)) return false;
-
-        DisproofObject that = (DisproofObject) o;
+        if (!(o instanceof DisproofObject that)) return false;
 
         if (!includedPrivateKeys.equals(that.includedPrivateKeys)) return false;
         return publicEntityIdentifierOfProver.equals(that.publicEntityIdentifierOfProver);

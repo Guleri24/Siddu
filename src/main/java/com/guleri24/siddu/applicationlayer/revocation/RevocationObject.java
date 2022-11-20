@@ -88,9 +88,7 @@ public class RevocationObject extends StorageElement {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof RevocationObject)) return false;
-
-        RevocationObject that = (RevocationObject) o;
+        if (!(o instanceof RevocationObject that)) return false;
 
         return getRevealedSecret().equals(that.getRevealedSecret());
     }

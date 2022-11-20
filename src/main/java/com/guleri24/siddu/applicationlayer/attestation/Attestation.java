@@ -224,9 +224,7 @@ public class Attestation extends StorageElement {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Attestation)) return false;
-
-        Attestation that = (Attestation) o;
+        if (!(o instanceof Attestation that)) return false;
 
         if (!getFirstLayer().equals(that.getFirstLayer())) return false;
         if (!getSecondLayer().equals(that.getSecondLayer())) return false;

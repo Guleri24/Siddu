@@ -26,7 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Demo {
-
     private final static String GREEN = "\u001B[32m";
     private final static String BLUE = "\u001B[34m";
     private final static String RESET = "\u001B[0m";

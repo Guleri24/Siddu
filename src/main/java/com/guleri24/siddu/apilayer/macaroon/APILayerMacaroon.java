@@ -119,9 +119,7 @@ public class APILayerMacaroon implements Exportable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof APILayerMacaroon)) return false;
-
-        APILayerMacaroon that = (APILayerMacaroon) o;
+        if (!(o instanceof APILayerMacaroon that)) return false;
 
         if (!publicIdentifier.equals(that.publicIdentifier)) return false;
         if (!rTreePolicyMacaroonElement.equals(that.rTreePolicyMacaroonElement)) return false;

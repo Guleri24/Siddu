@@ -94,16 +94,16 @@ public class ProofObject extends AbstractProofObject {
      * @return The retrievedPolicy argument, of which the {@link PolicyRight} is adjusted so that it's
      * equal to the most strict {@link PolicyRight} arguments. To continue the example given in this
      * documentation, the return value would be READ://A/B/C.
-     * @throws IllegalArgumentException If the two {@link RTreePolicy}s can't be merge in any way.
+     * @throws IllegalArgumentException If the two {@link RTreePolicy}s can't be merged in any way.
      */
     private static @NotNull RTreePolicy mergePoliciesForVerificationProcess(
             RTreePolicy currentlyHoldingPolicy,
-            @NotNull RTreePolicy retrievedPolicy) throws IllegalArgumentException {
+            @NotNull RTreePolicy retrievedPolicy) throws IllegalArgumentException, CloneNotSupportedException {
         if (currentlyHoldingPolicy == null || currentlyHoldingPolicy.coversRTreePolicy(retrievedPolicy))
             return retrievedPolicy;
         /*
         It's possible that the currentlyHoldingPolicy argument allows READ access, while the
-        retrievedPolicy allows WRITE access.
+        retrievedPolicy allows to WRITE access.
         Make a copy of the retrievedPolicy RTreePolicy, convert it to READ access and try again.
          */
         if (currentlyHoldingPolicy.getPolicyRight().equals(PolicyRight.READ) && retrievedPolicy.getPolicyRight().equals(PolicyRight.WRITE)) {
@@ -241,7 +241,7 @@ public class ProofObject extends AbstractProofObject {
      * @throws IOException              If the {@link StorageLayer} could not be consulted, due to an IO-related problem.
      * @throws IllegalArgumentException If the {@link ProofObject} could not be verified.
      */
-    public @NotNull RTreePolicy verify(@NotNull StorageLayer storageLayer) throws IOException, IllegalArgumentException {
+    public @NotNull RTreePolicy verify(@NotNull StorageLayer storageLayer) throws IOException, IllegalArgumentException, CloneNotSupportedException {
         // 1. Verify the chain of attestations.
         // 2. Verify the namespace attestation of the prover.
         // 3. Verify the personal queue.

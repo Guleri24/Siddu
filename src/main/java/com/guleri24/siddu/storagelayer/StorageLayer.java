@@ -61,7 +61,7 @@ public interface StorageLayer {
      */
     default @NotNull PersonalQueueIterator getPersonalQueueUser(@NotNull PublicEntityIdentifier publicEntityIdentifier) {
         return new PersonalQueueIterator() {
-            AtomicReference<StorageElementIdentifier> currentStorageElementIdentifier =
+            final AtomicReference<StorageElementIdentifier> currentStorageElementIdentifier =
                     new AtomicReference<>(new StorageElementIdentifier(publicEntityIdentifier.getNamespaceServiceProviderEmailAddressUserConcatenation()));
 
             @Override

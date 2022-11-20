@@ -60,9 +60,7 @@ public class ProofInformationSegmentAttestation implements Exportable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ProofInformationSegmentAttestation)) return false;
-
-        ProofInformationSegmentAttestation that = (ProofInformationSegmentAttestation) o;
+        if (!(o instanceof ProofInformationSegmentAttestation that)) return false;
 
         return getPrivateKeysIBE().equals(that.getPrivateKeysIBE());
     }

@@ -72,9 +72,7 @@ abstract class MacaroonElement<ObjectType extends Serializable> implements Expor
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MacaroonElement)) return false;
-
-        MacaroonElement<?> that = (MacaroonElement<?>) o;
+        if (!(o instanceof MacaroonElement<?> that)) return false;
 
         if (!getEncapsulatedObject().equals(that.getEncapsulatedObject())) return false;
         return getSignature().equals(that.getSignature());

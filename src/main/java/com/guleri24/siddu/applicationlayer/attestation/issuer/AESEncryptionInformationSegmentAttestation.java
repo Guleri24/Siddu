@@ -51,9 +51,7 @@ public class AESEncryptionInformationSegmentAttestation implements Exportable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AESEncryptionInformationSegmentAttestation)) return false;
-
-        AESEncryptionInformationSegmentAttestation that = (AESEncryptionInformationSegmentAttestation) o;
+        if (!(o instanceof AESEncryptionInformationSegmentAttestation that)) return false;
 
         return getAesKeyInformation().equals(that.getAesKeyInformation());
     }
