@@ -30,7 +30,7 @@ public class Demo {
     private final static String BLUE = "\u001B[34m";
     private final static String RESET = "\u001B[0m";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CloneNotSupportedException {
         // Generating the storage layer.
         System.out.println("Running...");
         var storageLayer = new MultiMappedStorageLayer();
@@ -40,19 +40,27 @@ public class Demo {
         var cloudA = EntityIdentifier.generateEntityIdentifierPair("cloudA");
         var cloudB = EntityIdentifier.generateEntityIdentifierPair("cloudB");
         var cloudC = EntityIdentifier.generateEntityIdentifierPair("cloudC");
+        var cloudD = EntityIdentifier.generateEntityIdentifierPair("cloudD");
+
         List<Pair<String, Pair<PrivateEntityIdentifier, PublicEntityIdentifier>>> clouds = new ArrayList<>();
         clouds.add(new ImmutablePair<>("cloudA", cloudA));
         clouds.add(new ImmutablePair<>("cloudB", cloudB));
         clouds.add(new ImmutablePair<>("cloudC", cloudC));
+        clouds.add(new ImmutablePair<>("cloudD", cloudD));
+
 
         // Generating encryption keys for the users.
         var userA = EntityIdentifier.generateEntityIdentifierPair("userA");
         var userB = EntityIdentifier.generateEntityIdentifierPair("userB");
         var userC = EntityIdentifier.generateEntityIdentifierPair("userC");
+        var userD = EntityIdentifier.generateEntityIdentifierPair("userD");
+
         List<Pair<String, Pair<PrivateEntityIdentifier, PublicEntityIdentifier>>> users = new ArrayList<>();
         users.add(new ImmutablePair<>("userA", userA));
         users.add(new ImmutablePair<>("userB", userB));
         users.add(new ImmutablePair<>("userC", userC));
+        users.add(new ImmutablePair<>("userD", userD));
+
 
         List<Pair<String, Pair<PrivateEntityIdentifier, PublicEntityIdentifier>>> allEntities = new ArrayList<>();
         allEntities.addAll(clouds);

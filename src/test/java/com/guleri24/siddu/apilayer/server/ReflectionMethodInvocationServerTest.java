@@ -20,7 +20,7 @@ class ReflectionMethodInvocationServerTest {
         assertEquals(128, server.receivedTwo.get());
     }
 
-    class TestReflectionMethodInvocationServer extends ReflectionMethodInvocationServer {
+    static class TestReflectionMethodInvocationServer extends ReflectionMethodInvocationServer {
 
         private final AtomicReference<String> receivedOne = new AtomicReference<>();
         private final AtomicInteger receivedTwo = new AtomicInteger();
@@ -49,7 +49,7 @@ class ReflectionMethodInvocationServerTest {
 
                 @Override
                 void respond(@NotNull ReflectionMethodInvocationServerResponse response) {
-                    System.out.println(String.format("Response: %s", response));
+                    System.out.printf("Response: %s%n", response);
                 }
 
                 @Override

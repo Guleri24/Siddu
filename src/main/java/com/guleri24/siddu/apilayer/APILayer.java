@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Class representing the API layer of the framework.
@@ -99,7 +100,7 @@ public class APILayer extends Thread implements Closeable, FileServerInterface {
      * @param directory The directory.
      */
     private void deleteContentDirectory(@NotNull File directory) {
-        for (var fileOrDir : directory.listFiles()) {
+        for (var fileOrDir : Objects.requireNonNull(directory.listFiles())) {
             if (fileOrDir.isDirectory())
                 deleteContentDirectory(fileOrDir);
             fileOrDir.delete();
