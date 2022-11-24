@@ -30,8 +30,7 @@ public class DissertationDemo {
         for (int i = 8; i <= 100; i++) {
             RTreePolicy rTreePolicy = new RTreePolicy(PolicyRight.READ, "A".repeat(i - 7));
             var entityPair = EntityIdentifier.generateEntityIdentifierPair("");
-            IssuerPartAttestation issuerPartAttestation = new IssuerPartAttestation(entityPair.getKey(), entityPair.getValue(),
-                    entityPair.getRight(), new RevocationCommitment(), rTreePolicy);
+            IssuerPartAttestation issuerPartAttestation = new IssuerPartAttestation(entityPair.getKey(), entityPair.getValue(), entityPair.getRight(), new RevocationCommitment(), rTreePolicy);
             byte[] serialized = ExportableUtils.serialize(issuerPartAttestation);
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
@@ -45,10 +44,8 @@ public class DissertationDemo {
         for (int i = 8; i <= 100; i++) {
             RTreePolicy rTreePolicy = new RTreePolicy(PolicyRight.READ, "A".repeat(i - 7));
             var entityPair = EntityIdentifier.generateEntityIdentifierPair("");
-            IssuerPartAttestation issuerPartAttestation = new IssuerPartAttestation(entityPair.getKey(), entityPair.getValue(),
-                    entityPair.getRight(), new RevocationCommitment(), rTreePolicy);
-            Attestation attestation = new Attestation(new StorageElementIdentifier(), issuerPartAttestation, new RevocationCommitment(),
-                    new StorageElementIdentifier(), entityPair.getKey());
+            IssuerPartAttestation issuerPartAttestation = new IssuerPartAttestation(entityPair.getKey(), entityPair.getValue(), entityPair.getRight(), new RevocationCommitment(), rTreePolicy);
+            Attestation attestation = new Attestation(new StorageElementIdentifier(), issuerPartAttestation, new RevocationCommitment(), new StorageElementIdentifier(), entityPair.getKey());
             byte[] serialized = ExportableUtils.serialize(attestation);
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
