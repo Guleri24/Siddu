@@ -17,11 +17,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class DissertationDemo {
+    private final static String CYAN = "\u001B[1;36m";
+    private final static String RESET = "\u001B[0m";
 
     public static void main(String[] args) throws IOException {
+        OperationTime time = new OperationTime();
         FileWriter fileWriter;
 
         System.out.println("Invitations...");
+        time.start();
         fileWriter = new FileWriter("invitation_objects.txt");
         for (int i = 8; i <= 100; i++) {
             RTreePolicy rTreePolicy = new RTreePolicy(PolicyRight.READ, "A".repeat(i - 7));
@@ -32,8 +36,11 @@ public class DissertationDemo {
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
         fileWriter.close();
+        time.end();
+        System.out.println(CYAN + "Invitations: " + time.getDuration() + "ms" + RESET);
 
         System.out.println("Attestations...");
+        time.start();
         fileWriter = new FileWriter("attestation_objects.txt");
         for (int i = 8; i <= 100; i++) {
             RTreePolicy rTreePolicy = new RTreePolicy(PolicyRight.READ, "A".repeat(i - 7));
@@ -45,9 +52,12 @@ public class DissertationDemo {
             byte[] serialized = ExportableUtils.serialize(attestation);
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
+        time.end();
+        System.out.println(CYAN + "Attestations: " + time.getDuration() + "ms" + RESET);
         fileWriter.close();
 
         System.out.println("Proof objects...");
+        time.start();
         fileWriter = new FileWriter("proof_objects.txt");
         for (int i = 1; i <= 1000; i++) {
             String[] aesKeys = new String[i];
@@ -60,9 +70,12 @@ public class DissertationDemo {
             byte[] serialized = ExportableUtils.serialize(proofObject);
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
+        time.end();
+        System.out.println(CYAN + "Proof objects: " + time.getDuration() + "ms" + RESET);
         fileWriter.close();
 
         System.out.println("Macaroon objects...");
+        time.start();
         APILayerMacaroonManager apiLayerMacaroonManager = new APILayerMacaroonManager();
         fileWriter = new FileWriter("macaroon_objects.txt");
         for (int i = 8; i <= 1000; i++) {
@@ -71,6 +84,8 @@ public class DissertationDemo {
             byte[] serialized = ExportableUtils.serialize(macaroon);
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
+        time.end();
+        System.out.println(CYAN + "Macaroon objects: " + time.getDuration() + "ms" + RESET);
         fileWriter.close();
 
 
