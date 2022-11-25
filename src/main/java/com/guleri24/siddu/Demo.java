@@ -19,6 +19,7 @@ import com.guleri24.siddu.storagelayer.map.MultiMappedStorageLayer;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.*;
@@ -34,6 +35,8 @@ public class Demo {
 
     public static void main(String[] args) throws IOException, CloneNotSupportedException {
         OperationTime time = new OperationTime();
+        FileWriter resultWriter = new FileWriter("results.txt", true);
+        resultWriter.write("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
         // Generating the storage layer.
         System.out.println("Running...");
@@ -41,11 +44,13 @@ public class Demo {
         time.start();
         var storageLayer = new MultiMappedStorageLayer();
         time.end();
+        resultWriter.write(String.format("Generating the storage layer took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Storage Layer Setup Time: " + time.getDuration() + "ms" + RESET);
 
         time.start();
         var macaroonManager = new APILayerMacaroonManager();
         time.end();
+        resultWriter.write(String.format("Generating the macaroon manager took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Macaroon Manager Setup Time: " + time.getDuration() + "ms" + RESET);
 
         // Generating encryption keys for the cloud storage service providers.
@@ -56,6 +61,7 @@ public class Demo {
         var cloudC = EntityIdentifier.generateEntityIdentifierPair("cloudC");
         var cloudD = EntityIdentifier.generateEntityIdentifierPair("cloudD");
         time.end();
+        resultWriter.write(String.format("Generating the encryption keys for the cloud storage service providers took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Cloud Encryption Key Generation Time: " + time.getDuration() + "ms" + RESET);
 
         time.start();
@@ -65,6 +71,7 @@ public class Demo {
         clouds.add(new ImmutablePair<>("cloudC", cloudC));
         clouds.add(new ImmutablePair<>("cloudD", cloudD));
         time.end();
+        resultWriter.write(String.format("Generating the list of cloud storage service providers took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Clouds List Setup Time: " + time.getDuration() + "ms" + RESET);
 
 
@@ -75,6 +82,7 @@ public class Demo {
         var userC = EntityIdentifier.generateEntityIdentifierPair("userC");
         var userD = EntityIdentifier.generateEntityIdentifierPair("userD");
         time.end();
+        resultWriter.write(String.format("Generating the encryption keys for the users took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "User Encryption Key Generation Time: " + time.getDuration() + "ms" + RESET);
 
         time.start();
@@ -84,6 +92,7 @@ public class Demo {
         users.add(new ImmutablePair<>("userC", userC));
         users.add(new ImmutablePair<>("userD", userD));
         time.end();
+        resultWriter.write(String.format("Generating the list of users took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Users List Setup Time: " + time.getDuration() + "ms" + RESET);
 
         time.start();
@@ -99,6 +108,7 @@ public class Demo {
                     GREEN, RESET, entity.getRight().getRight().getNamespaceServiceProviderEmailAddressUserConcatenation());
         }
         time.end();
+        resultWriter.write(String.format("Printing the list of all entities took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "All Entities List Setup Time: " + time.getDuration() + "ms" + RESET);
 
         time.start();
@@ -107,6 +117,7 @@ public class Demo {
         queueStorageElementIdentifiers.put(userB.getRight(), new StorageElementIdentifier(userB.getRight().getNamespaceServiceProviderEmailAddressUserConcatenation()));
         queueStorageElementIdentifiers.put(userC.getRight(), new StorageElementIdentifier(userC.getRight().getNamespaceServiceProviderEmailAddressUserConcatenation()));
         time.end();
+        resultWriter.write(String.format("Generating the storage element identifiers for the personal queues took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Queue Storage Element Identifiers Setup Time: " + time.getDuration() + "ms" + RESET);
 
         // Registering the users to the respective cloud storage service providers.
@@ -128,6 +139,7 @@ public class Demo {
             System.out.printf("%nFirst attestation in personal queue of %s%s%s:\t%s%n", BLUE, user.getLeft(), RESET, namespaceAttestation);
         }
         time.end();
+        resultWriter.write(String.format("Registering the users to the respective cloud storage service providers took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Registering the users to the respective cloud storage service providers: " + time.getDuration() + "ms" + RESET);
         System.out.println();
 
@@ -160,6 +172,7 @@ public class Demo {
             System.out.printf("%sAttestation (%s --> %s):%s\t%s%n", BLUE, entityNames.remove(0), entityNames.remove(0), RESET, attestation);
         }
         time.end();
+        resultWriter.write(String.format("Generating the necessary attestations for the demo took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Generating the necessary attestations for the demo: " + time.getDuration() + "ms" + RESET);
 
         // Personal queues
@@ -179,6 +192,7 @@ public class Demo {
             }
         }
         time.end();
+        resultWriter.write(String.format("Retrieving the personal queues took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Personal queues: " + time.getDuration() + "ms" + RESET);
 
 
@@ -191,6 +205,7 @@ public class Demo {
         aesKeys = generatedAttestationsForDemo.get(2).getFirstLayer().getAesEncryptionInformationSegment()
                 .decrypt(userC.getLeft(), policy);
         time.end();
+        resultWriter.write(String.format("Obtaining the first ephemeral AES key of the namespace attestation of user C took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Obtain the first ephemeral AES key of the namespace attestation of user C: " + time.getDuration() + "ms" + RESET);
 
         // Generating the first proof object.
@@ -203,6 +218,7 @@ public class Demo {
         var macaroonOne = macaroonManager.registerPolicy(proofObjectOne.verify(storageLayer));
         System.out.printf("%sResulting macaroon:%s%n%s%n%n", BLUE, RESET, macaroonOne);
         time.end();
+        resultWriter.write(String.format("Generating the first proof object took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Generating the first proof object: " + time.getDuration() + "ms" + RESET);
 
         // Generating the second proof object.
@@ -216,6 +232,7 @@ public class Demo {
         var macaroonTwo = macaroonManager.registerPolicy(proofObjectTwo.verify(storageLayer));
         System.out.printf("%sResulting macaroon:%s%n%s%n%n", BLUE, RESET, macaroonTwo);
         time.end();
+        resultWriter.write(String.format("Generating the second proof object took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Generating the second proof object: " + time.getDuration() + "ms" + RESET);
 
         // Revoking the attestation user A --> user B
@@ -224,6 +241,7 @@ public class Demo {
         System.out.printf("%sRevoking the attestation (userA --> userB):%s%n%s%n%n", BLUE, RESET, revocationObject);
         storageLayer.put(revocationObject);
         time.end();
+        resultWriter.write(String.format("Revoking the attestation (userA --> userB) took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Revoking the attestation user A --> user B: " + time.getDuration() + "ms" + RESET);
 
         // Generating the second proof object.
@@ -237,6 +255,7 @@ public class Demo {
         macaroonTwo = macaroonManager.registerPolicy(proofObjectTwo.verify(storageLayer));
         System.out.printf("%sResulting macaroon:%s%n%s%n%n", BLUE, RESET, macaroonTwo);
         time.end();
+        resultWriter.write(String.format("Generating the second proof object took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Generating the second proof object: " + time.getDuration() + "ms" + RESET);
 
         // Generating the first proof object.
@@ -256,7 +275,10 @@ public class Demo {
             e.printStackTrace();
         }
         time.end();
+        resultWriter.write(String.format("Generating the first proof object took %d ms.%n", time.getDuration()));
         System.out.println(CYAN + "Generating the first proof object: " + time.getDuration() + "ms" + RESET);
 
+        resultWriter.write("Done\n");
+        resultWriter.close();
     }
 }

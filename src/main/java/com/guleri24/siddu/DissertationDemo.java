@@ -23,6 +23,8 @@ public class DissertationDemo {
     public static void main(String[] args) throws IOException {
         OperationTime time = new OperationTime();
         FileWriter fileWriter;
+        FileWriter resultWriter = new FileWriter("results.txt", true);
+        resultWriter.write("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
         System.out.println("Invitations...");
         time.start();
@@ -36,6 +38,7 @@ public class DissertationDemo {
         }
         fileWriter.close();
         time.end();
+        resultWriter.write(String.format("Invitations: %s ms.%n", time.getDuration()));
         System.out.println(CYAN + "Invitations: " + time.getDuration() + "ms" + RESET);
 
         System.out.println("Attestations...");
@@ -50,6 +53,7 @@ public class DissertationDemo {
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
         time.end();
+        resultWriter.write(String.format("Attestations: %s ms.%n", time.getDuration()));
         System.out.println(CYAN + "Attestations: " + time.getDuration() + "ms" + RESET);
         fileWriter.close();
 
@@ -68,6 +72,7 @@ public class DissertationDemo {
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
         time.end();
+        resultWriter.write(String.format("Proof objects: %s ms.%n", time.getDuration()));
         System.out.println(CYAN + "Proof objects: " + time.getDuration() + "ms" + RESET);
         fileWriter.close();
 
@@ -82,10 +87,12 @@ public class DissertationDemo {
             fileWriter.write(String.format("%s\t%s%n", i, serialized.length));
         }
         time.end();
+        resultWriter.write(String.format("Macaroon objects: %s ms.%n", time.getDuration()));
         System.out.println(CYAN + "Macaroon objects: " + time.getDuration() + "ms" + RESET);
         fileWriter.close();
 
-
+        resultWriter.write("Done\n");
+        resultWriter.close();
         System.out.println("Done.");
     }
 }
