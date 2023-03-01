@@ -73,6 +73,7 @@ public class ElectedMembersServer {
     }
     
     // Example usage
+    /*
     public static void main(String[] args) {
         
         List<Member> electedMembers = new ArrayList<>();
@@ -85,4 +86,5 @@ public class ElectedMembersServer {
         ElectedMembersServer server = new ElectedMembersServer(electedMembers);
         server.start();
     }
+    */
 }
