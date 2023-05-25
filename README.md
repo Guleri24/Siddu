@@ -41,5 +41,27 @@ A framework which focus on authorization over a distributed environment with Zer
 * While Loop:: Next attestation found: --personalQueue_next
 * Retrieving the personal queues took %d ms.%n --time ms
 * Personal queues: --time ms
-* 
-
+* Obtaining the first ephemeral AES key of the namespace attestation of user C took %d ms.%n --time ms
+* Obtain the first ephemeral AES key of the namespace attestation of user X: --time ms
+* Generating first variant of the proof object (userX --> userY --> userZ)
+* Resulting proof object: --proofObjectOne
+* Resulting macaroon: --macaroonOne
+* Generating the first proof object took %d ms.%n --time ms
+* Generating the first proof object: --time ms
+* Generating second variant of the proof object (userX --> userZ)
+* Resulting proof object: --proofObjectTwo
+* Resulting macaroon: --macaroonTwo
+* Generating the second proof object took %d ms.%n --time ms
+* Generating the second proof object: --time ms
+* Revoking the attestation (userX --> userY) took %d ms.%n --time ms
+* Revoking the attestation user X --> user Y: --time ms
+* Generating second variant of the proof object (userX --> userZ)
+* Resulting proof object: --proofOnjectTwo
+* Resulting macaroon: --macaroonTwo
+* Generating the second proof object took %d ms.%n --time ms
+* Generating the second proof object: --time ms
+* Generating first variant of the proof object (userX --> userY --> userZ)
+* Resulting proof object --proofObjectOne
+* Resulting macaroon: --macaroonOne
+* Generating the first proof object took %d ms.%n --time ms
+* Generating the first proof object: --time ms
